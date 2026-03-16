@@ -31,4 +31,8 @@ Debbie run headless:
 
 ```
 
-A successful script should open Isaac Sim. 
+A successful script should open Isaac Sim.
+
+## Resources
+  * [How to add my own usd into isaac sim?](https://forums.developer.nvidia.com/t/how-to-add-my-own-usd-into-isaac-sim/251205)
+  * [Isaac Sim - How to import USD assets into a scene?](https://forums.developer.nvidia.com/t/isaac-sim-how-to-import-usd-assets-into-a-scene/201253/4)
