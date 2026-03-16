@@ -2,6 +2,7 @@
 
 ## Requirements
   * [Isaac Sim 5.1.0](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/install_workstation.html)
+  * [Newton Physics for Isaac Lab](https://developer.nvidia.com/newton-physics)
 
 ## Setup 
 
@@ -16,9 +17,18 @@ From your folder, start Isaac Sim
 
 ```
 
-Run experimentatl scripts using: 
+Run experimental scripts using: 
 ```bash
 
 ./python.sh scripts/test_sim.py
 
 ```
+
+Debbie run headless: 
+```bash
+
+.\python.bat C:\Users\debbi\Documents\VLA\vla-isaacsim\scripts\franka_robot.py
+
+```
+
+A successful script should open Isaac Sim. 
