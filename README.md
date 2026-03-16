@@ -15,3 +15,10 @@ From your folder, start Isaac Sim
 .\isaac-sim.selector.bat 
 
 ```
+
+Run experimentatl scripts using: 
+```bash
+
+./python.sh scripts/test_sim.py
+
+```
