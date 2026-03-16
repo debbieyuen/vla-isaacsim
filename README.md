@@ -12,23 +12,17 @@ Next, run the `isaacsim isaacsim.exp.compatibility_check` command.
 
 From your folder, start Isaac Sim
 ```bash
-
 .\isaac-sim.selector.bat 
-
 ```
 
 Run experimental scripts using: 
 ```bash
-
 ./python.sh scripts/test_sim.py
-
 ```
 
 Debbie run headless: 
 ```bash
-
 .\python.bat C:\Users\debbi\Documents\VLA\vla-isaacsim\scripts\franka_robot.py
-
 ```
 
 A successful script should open Isaac Sim.
