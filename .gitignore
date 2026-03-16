@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+
+# Isaac Sim cache
+.omniverse
+.cache
+logs/
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
