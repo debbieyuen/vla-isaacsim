@@ -1,13 +1,11 @@
-from isaacsim.core.articulations import Articulation
 from isaacsim.core.utils.stage import add_reference_to_stage
 
 class Unitree:
-    def __init__(self, prim_path="/World/Unitree", name="unitree"):
-        # 🔑 THIS is what Franka does internally
-        add_reference_to_stage(
-            "omniverse://localhost/NVIDIA/Assets/Robots/Unitree/unitree_h1.usd",
-            prim_path
-        )
+    def __init__(self, prim_path="/World/Unitree", name="unitree", usd_path=None):
+        if usd_path is None:
+            raise ValueError("usd_path is required")
 
-        # wrap as articulation
-        self._articulation = Articulation(prim_path=prim_path)
+        self.prim_path = prim_path
+        self.name = name
+
+        add_reference_to_stage(usd_path, prim_path)
