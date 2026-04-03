@@ -44,6 +44,14 @@ To get more data, run the simulator file `h1_standalone.py`. Give it some time t
 python check_data.py
 ```
 
+To run the combined data files.In the scripts folder run: 
+```
+python build_pairs_manifest.py --mode sample --include-h1-hf --h1-max-rows 500
+```
+
 ## Resources
   * [How to add my own usd into isaac sim?](https://forums.developer.nvidia.com/t/how-to-add-my-own-usd-into-isaac-sim/251205)
   * [Isaac Sim - How to import USD assets into a scene?](https://forums.developer.nvidia.com/t/isaac-sim-how-to-import-usd-assets-into-a-scene/201253/4)
+  ### Datasets
+  * [USC PSI Lab: Humanoid Everyday H1](https://huggingface.co/datasets/USC-PSI-Lab/Humanoid-Everyday-H1)
+  * [USC PSI Lab: Humanoid-X](https://huggingface.co/datasets/USC-PSI-Lab/Humanoid-X)
