@@ -11,3 +11,6 @@ logs/
 
 # OS
 .DS_Store
+
+# Data
+data/

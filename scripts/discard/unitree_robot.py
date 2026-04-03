@@ -18,8 +18,8 @@ robot = Unitree(
 
 world.reset()
 
-art = Articulation("/World/Unitree")
-art.initialize()
+# art = Articulation("/World/Unitree")
+# art.initialize()
 
 # print joints
 # joint_names = art.get_joint_names()

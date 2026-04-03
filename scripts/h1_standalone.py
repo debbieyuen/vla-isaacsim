@@ -14,6 +14,10 @@
 # limitations under the License.
 
 from isaacsim import SimulationApp
+from logs import DataLogs
+from pathlib import Path
+import time
+import json
 
 simulation_app = SimulationApp({"headless": False})
 
@@ -26,6 +30,10 @@ from isaacsim.core.api import World
 from isaacsim.core.utils.prims import define_prim
 from isaacsim.robot.policy.examples.robots import H1FlatTerrainPolicy
 from isaacsim.storage.native import get_assets_root_path
+# from isaacsim.core.api import Articulation
+# from isaacsim.core.prims import Articulation
+# Log the joints, velocity, positions
+from unitree_episode_logger import UnitreeEpisodeLogger
 
 parser = argparse.ArgumentParser(description="Define the number of robots.")
 parser.add_argument("--num-robots", type=int, default=1, help="Number of robots (default: 1)")
@@ -41,23 +49,50 @@ print(f"Number of robots: {args.num_robots}")
 first_step = True
 reset_needed = False
 robots = []
+# initialize data logs
+logs = DataLogs()
 
+#Logging
+logger = UnitreeEpisodeLogger(
+    episode_dir=Path(__file__).resolve().parent.parent / "data" / "unitree_h1" / f"episode_{time.strftime('%Y-%m-%d_%H-%M-%S')}",
+    robot_name="unitreeh1",
+    source="isaacsim",
+    behavior="walk",
+)
 
 # initialize robot on first step, run robot advance
 def on_physics_step(step_size) -> None:
     global first_step
     global reset_needed
+    global log_step
+
     if first_step:
         for robot in robots:
             robot.initialize()
+            logger.initialize_from_robot(robot)
         first_step = False
     elif reset_needed:
         my_world.reset(True)
         reset_needed = False
         first_step = True
+        return 
+    
     else:
+        global log_step
         for robot in robots:
             robot.forward(step_size, base_command)
+
+            # logs.log(robot.robot, robot, step=log_step, behavior="walk")
+
+            # joints, velocities, times
+            logger.record(
+                robot,
+                step_idx=log_step,
+                sim_time_s=log_step * step_size,
+                wall_time_s=time.time(),
+            )
+
+        log_step += 1
 
 
 # spawn world
@@ -87,6 +122,7 @@ my_world.add_physics_callback("physics_step", callback_fn=on_physics_step)
 
 # robot command
 base_command = np.zeros(3)
+log_step = 0
 
 i = 0
 while simulation_app.is_running():
@@ -106,5 +142,11 @@ while simulation_app.is_running():
         elif i == 200:
             i = 0
         i += 1
+
+# Save Logs
+timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
+npz_path, json_path = logger.save(timestamp)
+print(f"Saved rollout to: {npz_path}")
+print(f"Saved metadata to: {json_path}")
 
 simulation_app.close()
